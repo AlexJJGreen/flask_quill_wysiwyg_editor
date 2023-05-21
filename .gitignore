@@ -1,0 +1,26 @@
+# Ignore build output directories and venv
+bin/
+obj/
+venv/
+__pycache__/
+.vscode/
+migrations/
+
+# Ignore dependency directories
+node_modules/
+packages/
+
+# Ignore compiled code
+*.class
+*.dll
+*.exe
+
+# Ignore log files
+*.log
+
+# Ignore configuration files with sensitive information
+*.config
+*.env
+
+#ingore notes docs and requirments
+*.txt
