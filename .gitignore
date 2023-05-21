@@ -24,3 +24,7 @@ packages/
 
 #ingore notes docs and requirments
 *.txt
+
+#ignore db
+app.db
+config.py
