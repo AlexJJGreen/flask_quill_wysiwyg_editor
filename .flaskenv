@@ -1,2 +1,2 @@
-FLASK_APP=mvc.py
+FLASK_APP=text_editor.py
  

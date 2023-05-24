@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+WYSIWYG Editor
+{% endblock %}
+{% block styles %}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('editor.static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block page_title %}
+Post Editor
+{% endblock %}
+
+{% block content %}
+<form action="/save_content" method="post">
+    <div id="editor"></div>
+    <input type="submit" value="Save">
+</form>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="{{ url_for('editor.static', filename='js/editor.js') }}"></script>
+
+{% endblock %}
