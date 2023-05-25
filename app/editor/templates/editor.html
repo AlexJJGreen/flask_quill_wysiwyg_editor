@@ -9,12 +9,35 @@ WYSIWYG Editor
 {% endblock %}
 
 {% block page_title %}
-Post Editor
+Content Editor
 {% endblock %}
 
 {% block content %}
 <form action="/save_content" method="post">
-    <div id="editor"></div>
+    <!--  
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(140), index=True)
+    snippet = db.Column(db.String(280), index=True)
+    thumbnail_url = db.Column(db.String(280), index=True)
+    content = db.Text()
+
+    -->
+    <div class="mb-3">
+        <label for="content-title">Content Title</label>
+        <input type="text" class="form-control" id="content-title">
+    </div>
+    <div class="mb-3">
+        <label for="content-snippet">Content Snippet</label>
+        <textarea class="form-control" id="content-snippet" cols="30" rows="5"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="content-thumbnail-url">Content Thumbnail URL</label>
+        <input class="form-control" type="text" id="content-thumbnail-url">
+    </div>
+    <div class="mb-3">
+        <label for="editor">Content</label>
+        <div id="editor"></div>
+    </div>
     <input type="submit" value="Save">
 </form>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
