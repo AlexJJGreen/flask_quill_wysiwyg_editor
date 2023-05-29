@@ -2,4 +2,9 @@
 
 {% block content %}
 <h1>TEST</h1>
+{% for post in content %}
+{{ post.id }}
+<a href="{{ url_for('main.content', id=post.id) }}">{{ post.title }}</a>
+<p>{{ post.snippet }}</p>
+{% endfor %}
 {% endblock %}
