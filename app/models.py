@@ -29,4 +29,4 @@ class Content(db.Model):
     title = db.Column(db.String(140), index=True)
     snippet = db.Column(db.String(280), index=True)
     thumbnail_url = db.Column(db.String(280), index=True)
-    content = db.Text()
+    content = db.Column(db.Text)

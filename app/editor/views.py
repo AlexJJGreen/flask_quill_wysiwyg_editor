@@ -21,5 +21,5 @@ def save_content():
 
     db.session.add(content_to_post)
     db.session.commit()
-    print(data["title"])
+    print(data)
     return render_template("editor.html", page_title="Content Editor")

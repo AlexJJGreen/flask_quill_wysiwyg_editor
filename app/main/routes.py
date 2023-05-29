@@ -1,4 +1,5 @@
 from flask import render_template
+from bs4 import BeautifulSoup
 from app.models import Content
 from app import db
 from . import bp
@@ -19,4 +20,5 @@ def index():
 @bp.route("/content/<int:id>", methods=["GET", "POST"])
 def content(id):
     post = db.session.query(Content).get(id)
+    post.content = BeautifulSoup(post.content, "html.parser")
     return render_template("content.html", post=post)
