@@ -8,35 +8,44 @@ const quill = new Quill('#editor', {
     }
 });
 
-const saveBtn = document.querySelector('#saveBtn');
-saveBtn.addEventListener('click', () => {
-    /*
-    const postTitle = document.getElementById("content-title").innerText;
-    const postSnippet = document.getElementById("content-snippet").innerText;
-    const postThumbnailURL = document.getElementById("content-thumbnail-url").innerText;
-    const postContent = quill.root.innerHTML;
-    */
 
-    const content = JSON.stringify({
-        post_title: document.getElementById("content-title").innerText,
-        post_snippet: document.getElementById("content-snippet").innerText,
-        post_thumbnail_url: document.getElementById("content-thumbnail-url").innerText,
-        post_content: quill.root.innerHTML
-    })
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("content-form");
+    const editor = document.getElementById("editor").firstChild;
 
-    fetch('/save_content', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: content
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Post saved successfully.');
-            } else {
-                alert('Failed to save the post.');
-            }
-        });
+    form.addEventListener("submit", (e) => {
+
+        // prevent default behaviour
+        e.preventDefault();
+
+        /* create data object from form to model ->
+            title = db.Column
+            snippet = db.Column
+            thumbnail_url = db.Column
+            content = db.Text
+        */
+        let data = {
+            title: document.getElementById("content-title").value,
+            snippet: document.getElementById("content-snippet").value,
+            thumbnailUrl: document.getElementById("content-thumbnail-url").value,
+            content: editor.innerHTML
+        };
+
+        postData("/editor/post_content", data)
+            .then(data => console.log(data))
+            .catch(error => console.log("Error", error));
+
+    });
 });
+
+async function postData(url = "", data = {}) {
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    return response.json();
+}

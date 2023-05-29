@@ -8,12 +8,9 @@ WYSIWYG Editor
 <link rel="stylesheet" href="{{ url_for('editor.static', filename='css/styles.css') }}">
 {% endblock %}
 
-{% block page_title %}
-Content Editor
-{% endblock %}
 
 {% block content %}
-<form action="/save_content" method="post">
+<form id="content-form" action="" method="">
     <!--  
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140), index=True)
@@ -24,7 +21,7 @@ Content Editor
     -->
     <div class="mb-3">
         <label for="content-title">Content Title</label>
-        <input type="text" class="form-control" id="content-title">
+        <input type="text" class="form-control" id="content-title" value="content-title">
     </div>
     <div class="mb-3">
         <label for="content-snippet">Content Snippet</label>

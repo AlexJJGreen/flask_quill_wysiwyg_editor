@@ -8,9 +8,10 @@ def editor():
     return render_template("editor.html", page_title="Content Editor")
 
 
-@bp.route("/save_content", methods=["POST"])
+@bp.route("/post_content", methods=["POST"])
 def save_content():
-    post_content = request.json.get("content", "")
+    data = request.get_json()
     # Save post_content to a database or a file.
     # content = Content(content=form.)
-    return jsonify({"success": True})
+    print(data)
+    return jsonify({"data": data}), 200
