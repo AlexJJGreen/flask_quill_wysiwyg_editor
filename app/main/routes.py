@@ -20,5 +20,6 @@ def index():
 @bp.route("/content/<int:id>", methods=["GET", "POST"])
 def content(id):
     post = db.session.query(Content).get(id)
-    post.content = BeautifulSoup(post.content, "html.parser")
+    if post.content:
+        post.content = BeautifulSoup(post.content, "html.parser")
     return render_template("content.html", post=post)

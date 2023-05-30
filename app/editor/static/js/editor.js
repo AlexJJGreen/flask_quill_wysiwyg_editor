@@ -13,17 +13,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("content-form");
     const editor = document.getElementById("editor").firstChild;
 
+    let url = new this.URL(window.location.href);
+
+    let postID = url.searchParams.get("id");
+
+    if (postID !== null) {
+        fetch('/edit_post/?id=' + postId)
+            .then(response => response.json())
+            .then(data => {
+                editor.appendChild(div);
+            });
+    }
+
     form.addEventListener("submit", (e) => {
 
         // prevent default behaviour
         e.preventDefault();
 
-        /* create data object from form to model ->
-            title = db.Column
-            snippet = db.Column
-            thumbnail_url = db.Column
-            content = db.Text
-        */
         let data = {
             title: document.getElementById("content-title").value,
             snippet: document.getElementById("content-snippet").value,

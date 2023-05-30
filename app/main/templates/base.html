@@ -31,13 +31,7 @@
                             <a class="nav-link active" aria-current="page" href="{{ url_for('main.index') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('editor.editor') }}">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Conact</a>
+                            <a class="nav-link" href="{{ url_for('editor.editor') }}">Editor</a>
                         </li>
                     </ul>
                     <nav class="navbar navbar-expand-sm">
@@ -72,7 +66,7 @@
                 </div>
             </div>
         </nav>
-        <h1 class="mt-2">
+        <h1 id="page-title" class="mt-2">
             {% if page_title %}
             {{ page_title }}
             {% endif %}

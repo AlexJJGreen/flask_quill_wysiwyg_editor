@@ -21,15 +21,17 @@ WYSIWYG Editor
     -->
     <div class="mb-3">
         <label for="content-title">Content Title</label>
-        <input type="text" class="form-control" id="content-title" value="content-title">
+        <input type="text" class="form-control" id="content-title" value="{% if post %}{{ post.title }}{% endif %}">
     </div>
     <div class="mb-3">
         <label for="content-snippet">Content Snippet</label>
-        <textarea class="form-control" id="content-snippet" cols="30" rows="5"></textarea>
+        <textarea class="form-control" id="content-snippet" cols="30"
+            rows="5">{% if post %}{{ post.snippet }}{% endif %}"</textarea>
     </div>
     <div class="mb-3">
         <label for="content-thumbnail-url">Content Thumbnail URL</label>
-        <input class="form-control" type="text" id="content-thumbnail-url">
+        <input class="form-control" type="text" id="content-thumbnail-url"
+            value="{% if post %}{{ post.thumbnail_url}}{% endif %}">
     </div>
     <div class="mb-3">
         <label for="editor">Content</label>

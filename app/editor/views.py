@@ -1,4 +1,4 @@
-from flask import request, jsonify, render_template
+from flask import request, jsonify, render_template, redirect
 from app import db
 from app.models import Content
 from . import bp
@@ -7,6 +7,12 @@ from . import bp
 @bp.route("/editor")
 def editor():
     return render_template("editor.html", page_title="Content Editor")
+
+
+@bp.route("/edit_post/?id=<int:id>", methods=["GET", "POST"])
+def edit_post(id):
+    post = db.session.query(Content).get(id)
+    return render_template("editor.html", page_title="Edit Post", post=post)
 
 
 @bp.route("/post_content", methods=["POST"])
@@ -22,4 +28,7 @@ def save_content():
     db.session.add(content_to_post)
     db.session.commit()
     print(data)
-    return render_template("editor.html", page_title="Content Editor")
+    return redirect("editor.html", page_title="Content Editor")
+
+
+## how to call save content based on URL ID
