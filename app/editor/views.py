@@ -9,8 +9,9 @@ def editor():
     return render_template("editor.html", page_title="Content Editor")
 
 
-@bp.route("/edit_post/?id=<int:id>", methods=["GET", "POST"])
-def edit_post(id):
+@bp.route("/edit_post", methods=["GET", "POST"])
+def edit_post():
+    id = request.args.get("id")
     post = db.session.query(Content).get(id)
     return render_template("editor.html", page_title="Edit Post", post=post)
 

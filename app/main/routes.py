@@ -17,7 +17,7 @@ def index():
     return render_template("index.html", content=content)
 
 
-@bp.route("/content/<int:id>", methods=["GET", "POST"])
+@bp.route("/content<int:id>", methods=["GET", "POST"])
 def content(id):
     post = db.session.query(Content).get(id)
     if post.content:
