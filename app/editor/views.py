@@ -22,20 +22,24 @@ def get_post(post_id):
     return jsonify({"content": post.content})
 
 
-@bp.route("/post_content", methods=["POST"])
+@bp.route("/post_content", methods=["GET", "POST"])
 def save_content():
     data = request.get_json()
-    content_to_post = Content(
-        title=data["title"],
-        snippet=data["snippet"],
-        thumbnail_url=data["thumbnailUrl"],
-        content=data["content"],
-    )
 
-    db.session.add(content_to_post)
+    if "id" in data:
+        post = db.session.query(Content).get(data["id"])
+        post.title = data["title"]
+        post.snippet = data["snippet"]
+        post.thumbnail_url = data["thumbnailUrl"]
+        post.content = data["content"]
+    else:
+        content_to_post = Content(
+            title=data["title"],
+            snippet=data["snippet"],
+            thumbnail_url=data["thumbnailUrl"],
+            content=data["content"],
+        )
+        db.session.add(content_to_post)
+
     db.session.commit()
-    print(data)
-    return redirect("editor.html", page_title="Content Editor")
-
-
-## how to call save content based on URL ID
+    return redirect("editor.html")

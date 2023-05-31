@@ -18,11 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let postID = url.searchParams.get("id");
 
     if (postID !== null) {
-        console.log(postID);
         fetch('/editor/get_post/' + postID)
             .then(response => response.json())
             .then(post => {
-                console.log(post);
                 editor.innerHTML = post.content;
             });
     }
@@ -32,16 +30,32 @@ document.addEventListener("DOMContentLoaded", function () {
         // prevent default behaviour
         e.preventDefault();
 
-        let data = {
-            title: document.getElementById("content-title").value,
-            snippet: document.getElementById("content-snippet").value,
-            thumbnailUrl: document.getElementById("content-thumbnail-url").value,
-            content: editor.innerHTML
-        };
+        if (postID !== null) {
+            console.log("triggred");
+            let data = {
+                id: postID,
+                title: document.getElementById("content-title").value,
+                snippet: document.getElementById("content-snippet").value,
+                thumbnailUrl: document.getElementById("content-thumbnail-url").value,
+                content: editor.innerHTML
+            };
 
-        postData("/editor/post_content", data)
-            .then(data => console.log(data))
-            .catch(error => console.log("Error", error));
+            postData("/editor/post_content", data)
+                .then(data => console.log(data))
+                .catch(error => console.log("Error", error));
+        }
+        else {
+            let data = {
+                title: document.getElementById("content-title").value,
+                snippet: document.getElementById("content-snippet").value,
+                thumbnailUrl: document.getElementById("content-thumbnail-url").value,
+                content: editor.innerHTML
+            };
+
+            postData("/editor/post_content", data)
+                .then(data => console.log(data))
+                .catch(error => console.log("Error", error));
+        }
 
     });
 });
