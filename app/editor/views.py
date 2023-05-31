@@ -16,6 +16,12 @@ def edit_post():
     return render_template("editor.html", page_title="Edit Post", post=post)
 
 
+@bp.route("/get_post/<int:post_id>", methods=["GET"])
+def get_post(post_id):
+    post = db.session.query(Content).get_or_404(post_id)
+    return jsonify({"content": post.content})
+
+
 @bp.route("/post_content", methods=["POST"])
 def save_content():
     data = request.get_json()

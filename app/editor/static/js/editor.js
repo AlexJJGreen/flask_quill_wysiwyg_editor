@@ -13,15 +13,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("content-form");
     const editor = document.getElementById("editor").firstChild;
 
+    // If editing post, retrieve ID param, pass to fetch and populate DOM
     let url = new URL(window.location.href);
-
     let postID = url.searchParams.get("id");
 
     if (postID !== null) {
-        fetch('editor/edit_post' + postID)
+        console.log(postID);
+        fetch('/editor/get_post/' + postID)
             .then(response => response.json())
             .then(post => {
-                editor.appendChild(post.content);
+                console.log(post);
+                editor.innerHTML = post.content;
             });
     }
 
