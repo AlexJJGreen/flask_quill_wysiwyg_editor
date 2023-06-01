@@ -26,7 +26,7 @@ WYSIWYG Editor
     <div class="mb-3">
         <label for="content-snippet">Content Snippet</label>
         <textarea class="form-control" id="content-snippet" cols="30"
-            rows="5">{% if post %}{{ post.snippet }}{% endif %}"</textarea>
+            rows="5">{% if post %}{{ post.snippet }}{% endif %}</textarea>
     </div>
     <div class="mb-3">
         <label for="content-thumbnail-url">Content Thumbnail URL</label>
@@ -39,6 +39,34 @@ WYSIWYG Editor
     </div>
     <input type="submit" value="Save">
 </form>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    Open Modal
+</button>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p>This is the modal body text.</p>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="{{ url_for('editor.static', filename='js/editor.js') }}"></script>
 

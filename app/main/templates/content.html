@@ -2,7 +2,6 @@
 
 {% block content %}
 <a href="{{ url_for('editor.edit_post', id=post.id) }}"><button>Edit</button></a>
-<a href="#"><button>Delete</button></a>
 <h1>{{ post.title }}</h1>
 {{ post.content|safe }}
 
