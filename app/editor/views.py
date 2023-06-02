@@ -22,6 +22,15 @@ def get_post(post_id):
     return jsonify({"content": post.content})
 
 
+@bp.route("/delete_post", methods=["GET", "POST"])
+def delete_post():
+    id = request.args.get("id")
+    post = db.session.query(Content).get(id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect("/editor")
+
+
 @bp.route("/post_content", methods=["GET", "POST"])
 def save_content():
     data = request.get_json()
@@ -42,4 +51,4 @@ def save_content():
         db.session.add(content_to_post)
 
     db.session.commit()
-    return redirect("editor.html")
+    return redirect("/editor")

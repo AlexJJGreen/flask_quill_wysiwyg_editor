@@ -37,11 +37,11 @@ WYSIWYG Editor
         <label for="editor">Content</label>
         <div id="editor"></div>
     </div>
-    <input type="submit" value="Save">
+    <input type="submit" class="btn btn-primary" value="Save">
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
+        Delete
+    </button>
 </form>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-    Open Modal
-</button>
 
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
@@ -50,18 +50,19 @@ WYSIWYG Editor
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
+                <h4 class="modal-title">Confirm Deletion</h4>
                 <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal Body -->
             <div class="modal-body">
-                <p>This is the modal body text.</p>
+                <p>Are you sure you would like to delete this post?</p>
             </div>
 
             <!-- Modal Footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button id="deleteBtn" type="button" class="btn btn-success" data-bs-dismiss="modal">Yes</button>
             </div>
 
         </div>

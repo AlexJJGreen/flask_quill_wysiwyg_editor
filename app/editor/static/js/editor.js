@@ -58,6 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     });
+
+    const deleteBtn = document.getElementById("deleteBtn");
+    deleteBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        deletePost("/editor/delete_post")
+            .then()
+            .catch(err => console.log(err));
+    })
+
 });
 
 async function postData(url = "", data = {}) {
@@ -70,4 +79,9 @@ async function postData(url = "", data = {}) {
     });
 
     return response.json();
+}
+
+async function deletePost(url) {
+    const response = await fetch(url);
+    return true;
 }
