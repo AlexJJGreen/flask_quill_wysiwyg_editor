@@ -1,4 +1,4 @@
-from flask import request, jsonify, render_template, redirect
+from flask import request, jsonify, render_template, redirect, url_for
 from app import db
 from app.models import Content
 from . import bp
@@ -24,11 +24,13 @@ def get_post(post_id):
 
 @bp.route("/delete_post", methods=["GET", "POST"])
 def delete_post():
-    id = request.args.get("id")
+    data = request.get_json()
+    id = data["id"]
+    print(id)
     post = db.session.query(Content).get(id)
     db.session.delete(post)
     db.session.commit()
-    return redirect("/editor")
+    return redirect(url_for("main.index"))
 
 
 @bp.route("/post_content", methods=["GET", "POST"])
@@ -51,4 +53,4 @@ def save_content():
         db.session.add(content_to_post)
 
     db.session.commit()
-    return redirect("/editor")
+    return redirect(url_for("main.index"))

@@ -62,10 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const deleteBtn = document.getElementById("deleteBtn");
     deleteBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        deletePost("/editor/delete_post")
+        postData("/editor/delete_post", { id: postID })
             .then()
             .catch(err => console.log(err));
-    })
+    });
 
 });
 
@@ -81,7 +81,13 @@ async function postData(url = "", data = {}) {
     return response.json();
 }
 
-async function deletePost(url) {
-    const response = await fetch(url);
+async function deletePost(url = "") {
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify()
+    });
     return true;
 }
