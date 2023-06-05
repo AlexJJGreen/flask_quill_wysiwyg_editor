@@ -62,9 +62,38 @@ document.addEventListener("DOMContentLoaded", function () {
     const deleteBtn = document.getElementById("deleteBtn");
     deleteBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        postData("/editor/delete_post", { id: postID })
-            .then()
-            .catch(err => console.log(err));
+        fetch('/editor/delete_post', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ id: postID })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                window.location.href = data.redirect;  // Redirect to the URL received from the server
+            })
+            .catch(error => {
+                console.log('There has been a problem with your fetch operation: ', error);
+            });
+        /*postData("/editor/delete_post", { id: postID })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok")
+                }
+                console.log(response);
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                window.location.href = data.redirect
+            })
+            .catch(error => console.log("There is an error", error));*/
     });
 
 });
@@ -89,5 +118,5 @@ async function deletePost(url = "") {
         },
         body: JSON.stringify()
     });
-    return true;
+    return response.json();
 }

@@ -24,13 +24,13 @@ def get_post(post_id):
 
 @bp.route("/delete_post", methods=["GET", "POST"])
 def delete_post():
-    data = request.get_json()
-    id = data["id"]
-    print(id)
-    post = db.session.query(Content).get(id)
-    db.session.delete(post)
-    db.session.commit()
-    return redirect(url_for("main.index"))
+    if request.method == "POST":
+        data = request.get_json()
+        post = db.session.query(Content).get(data["id"])
+        db.session.delete(post)
+        db.session.commit()
+        return jsonify({"redirect": url_for("main.index")})
+    return render_template("editor.html")
 
 
 @bp.route("/post_content", methods=["GET", "POST"])
@@ -53,4 +53,4 @@ def save_content():
         db.session.add(content_to_post)
 
     db.session.commit()
-    return redirect(url_for("main.index"))
+    return jsonify(redirect(url_for("main.index")))
